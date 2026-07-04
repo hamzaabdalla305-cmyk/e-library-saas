@@ -4,10 +4,10 @@
 <h2>تصفح الكتب</h2>
 <form method="get" action="{{ url_for('index') }}">
     <input type="text" name="q" placeholder="ابحث بالعنوان أو المؤلف..." value="{{ query }}">
-    <select name="category" onchange="this.form.submit()" style="width:100%; padding:10px; margin:8px 0; background:#0f1115; border:1px solid #2a2d34; color:#fff; border-radius:6px;">
+    <select name="category" onchange="this.form.submit()">
         <option value="">كل التصنيفات</option>
         {% for cat in categories %}
-        <option value="{{ cat }}" {% if cat == selected_category %}selected{% endif %}>{{ cat }}</option>
+            <option value="{{ cat }}" {% if cat == selected_category %}selected{% endif %}>{{ cat }}</option>
         {% endfor %}
     </select>
     <button class="btn" type="submit">بحث</button>
@@ -18,8 +18,12 @@
     <div class="card">
         <h3>{{ book.title }}</h3>
         <p>المؤلف: {{ book.author }}</p>
-        {% if book.category %}<p>التصنيف: {{ book.category }}</p>{% endif %}
-        {% if book.description %}<p>{{ book.description }}</p>{% endif %}
+        {% if book.category %}
+            <p>التصنيف: {{ book.category }}</p>
+        {% endif %}
+        {% if book.description %}
+            <p>{{ book.description }}</p>
+        {% endif %}
         <p>السعر: {{ book.price }} جنيه</p>
         <p>النسخ المتاحة: {{ book.copies_available }} / {{ book.copies_total }}</p>
 
@@ -36,9 +40,6 @@
     </div>
     {% endfor %}
 {% else %}
-    <p>لا توجد كتب حالياً.</p>
-{% endif %}
-{% endblock %}{% else %}
     <p>لا توجد كتب حالياً.</p>
 {% endif %}
 {% endblock %}
