@@ -4,6 +4,13 @@
 <h2>تصفح الكتب</h2>
 <form method="get" action="{{ url_for('index') }}">
     <input type="text" name="q" placeholder="ابحث بالعنوان أو المؤلف..." value="{{ query }}">
+    <select name="category" onchange="this.form.submit()" style="width:100%; padding:10px; margin:8px 0; background:#0f1115; border:1px solid #2a2d34; color:#fff; border-radius:6px;">
+        <option value="">كل التصنيفات</option>
+        {% for cat in categories %}
+        <option value="{{ cat }}" {% if cat == selected_category %}selected{% endif %}>{{ cat }}</option>
+        {% endfor %}
+    </select>
+    <button class="btn" type="submit">بحث</button>
 </form>
 
 {% if books %}
@@ -14,8 +21,16 @@
         {% if book.category %}<p>التصنيف: {{ book.category }}</p>{% endif %}
         {% if book.description %}<p>{{ book.description }}</p>{% endif %}
         <p>النسخ المتاحة: {{ book.copies_available }} / {{ book.copies_total }}</p>
+
         {% if current_user.is_authenticated %}
-            <a class="btn" href="{{ url_for('borrow_book', book_id=book.id) }}">استعارة</a>
+            {% if current_user.is_admin %}
+                <a class="btn" href="{{ url_for('edit_book', book_id=book.id) }}">تعديل</a>
+                <form method="post" action="{{ url_for('delete_book', book_id=book.id) }}" style="display:inline;" onsubmit="return confirm('متأكد من الحذف؟');">
+                    <button class="btn" style="background:#a83232;" type="submit">حذف</button>
+                </form>
+            {% else %}
+                <a class="btn" href="{{ url_for('borrow_book', book_id=book.id) }}">شراء الكتاب</a>
+            {% endif %}
         {% endif %}
     </div>
     {% endfor %}
