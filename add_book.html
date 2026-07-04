@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}إضافة كتاب{% endblock %}
+{% block content %}
+<h2>إضافة كتاب جديد</h2>
+<div class="card">
+    <form method="post">
+        <input type="text" name="title" placeholder="عنوان الكتاب" required>
+        <input type="text" name="author" placeholder="المؤلف" required>
+        <input type="text" name="category" placeholder="التصنيف">
+        <textarea name="description" placeholder="وصف الكتاب"></textarea>
+        <input type="number" name="copies" placeholder="عدد النسخ" min="1" value="1" required>
+        <button class="btn" type="submit">إضافة</button>
+    </form>
+</div>
+{% endblock %}
