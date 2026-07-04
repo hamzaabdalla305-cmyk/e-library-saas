@@ -20,6 +20,7 @@
         <p>المؤلف: {{ book.author }}</p>
         {% if book.category %}<p>التصنيف: {{ book.category }}</p>{% endif %}
         {% if book.description %}<p>{{ book.description }}</p>{% endif %}
+        <p>السعر: {{ book.price }} جنيه</p>
         <p>النسخ المتاحة: {{ book.copies_available }} / {{ book.copies_total }}</p>
 
         {% if current_user.is_authenticated %}
@@ -29,12 +30,15 @@
                     <button class="btn" style="background:#a83232;" type="submit">حذف</button>
                 </form>
             {% else %}
-                <a class="btn" href="{{ url_for('borrow_book', book_id=book.id) }}">شراء الكتاب</a>
+                <a class="btn" href="{{ url_for('purchase_page', book_id=book.id) }}">شراء الكتاب</a>
             {% endif %}
         {% endif %}
     </div>
     {% endfor %}
 {% else %}
+    <p>لا توجد كتب حالياً.</p>
+{% endif %}
+{% endblock %}{% else %}
     <p>لا توجد كتب حالياً.</p>
 {% endif %}
 {% endblock %}
