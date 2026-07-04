@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}حسابي{% endblock %}
+{% block content %}
+<h2>الكتب المستعارة حالياً</h2>
+{% if borrows %}
+    {% for record in borrows %}
+    <div class="card">
+        <h3>{{ record.book.title }}</h3>
+        <p>تاريخ الاستعارة: {{ record.borrow_date.strftime('%Y-%m-%d') }}</p>
+        <a class="btn" href="{{ url_for('return_book', record_id=record.id) }}">إرجاع الكتاب</a>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>لا توجد كتب مستعارة حالياً.</p>
+{% endif %}
+{% endblock %}
