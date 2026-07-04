@@ -6,7 +6,12 @@
     <form method="post">
         <input type="text" name="title" placeholder="عنوان الكتاب" required>
         <input type="text" name="author" placeholder="المؤلف" required>
-        <input type="text" name="category" placeholder="التصنيف">
+        <select name="category" required style="width:100%; padding:10px; margin:8px 0; background:#0f1115; border:1px solid #2a2d34; color:#fff; border-radius:6px;">
+            <option value="" disabled selected>اختر التصنيف</option>
+            {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat }}</option>
+            {% endfor %}
+        </select>
         <textarea name="description" placeholder="وصف الكتاب"></textarea>
         <input type="number" name="copies" placeholder="عدد النسخ" min="1" value="1" required>
         <button class="btn" type="submit">إضافة</button>
