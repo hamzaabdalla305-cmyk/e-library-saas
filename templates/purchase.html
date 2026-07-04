@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}إتمام الشراء{% endblock %}
+{% block content %}
+<h2>إتمام عملية الشراء</h2>
+<div class="card">
+    <h3>{{ book.title }}</h3>
+    <p>المؤلف: {{ book.author }}</p>
+    <p style="font-size:1.3em; color:#c9a227; font-weight:bold;">السعر: {{ book.price }} جنيه</p>
+
+    <form method="post" action="{{ url_for('checkout_book', book_id=book.id) }}">
+        <label>رقم البطاقة (تجريبي - أي رقم أكثر من 12 خانة)</label>
+        <input type="text" name="card_number" placeholder="0000 0000 0000 0000" required maxlength="19">
+        <label>تاريخ الانتهاء</label>
+        <input type="text" name="expiry" placeholder="MM/YY">
+        <label>CVV</label>
+        <input type="text" name="cvv" placeholder="123" maxlength="3">
+        <p style="color:#888; font-size:0.9em;">⚠️ هذه عملية دفع وهمية لأغراض العرض التوضيحي فقط، لا يتم أي خصم حقيقي.</p>
+        <button class="btn" type="submit">تأكيد الدفع والشراء</button>
+    </form>
+</div>
+{% endblock %}
