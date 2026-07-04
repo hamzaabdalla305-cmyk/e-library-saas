@@ -12,6 +12,7 @@
             {% endfor %}
         </select>
         <textarea name="description">{{ book.description or '' }}</textarea>
+        <input type="number" name="price" value="{{ book.price }}" step="0.01" min="0">
         <input type="number" name="copies" value="{{ book.copies_total }}" min="1" required>
         <button class="btn" type="submit">حفظ التعديلات</button>
     </form>
