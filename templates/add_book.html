@@ -13,6 +13,7 @@
             {% endfor %}
         </select>
         <textarea name="description" placeholder="وصف الكتاب"></textarea>
+        <input type="number" name="price" placeholder="السعر (جنيه)" step="0.01" min="0" value="0">
         <input type="number" name="copies" placeholder="عدد النسخ" min="1" value="1" required>
         <button class="btn" type="submit">إضافة</button>
     </form>
